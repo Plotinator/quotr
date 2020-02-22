@@ -21,6 +21,7 @@ class Navigation extends Component {
   }
 
   render () {
+    return null
     if (this.state.editing) {
       window.SCROLLWITHKEYS = false
     } else {

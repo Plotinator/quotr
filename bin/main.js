@@ -306,7 +306,7 @@ function saveFile (fileName, data, callback) {
 }
 
 function displayFileName (path) {
-  var stringBase = 'Plottr'
+  var stringBase = 'Quotr'
   if (TRIALMODE) stringBase += ' — ' + i18n('TRIAL Version') + ' (' + i18n('{days} days remaining', {days: DAYS_LEFT}) + ')'
   var matches = path.match(/.*\/(.*\.pltr)/)
   if (matches) stringBase += ` — ${matches[1]}`
@@ -769,7 +769,7 @@ function buildMenu () {
 
 function buildPlottrMenu () {
   var submenu = [{
-    label: i18n('About Plottr'),
+    label: i18n('About Quotr'),
     click: openAboutWindow,
   }, {
     label: i18n('Check for updates'),
@@ -845,7 +845,7 @@ function buildPlottrMenu () {
     })
   }
   return {
-    label: 'Plottr',
+    label: 'Quotr',
     submenu: submenu
   }
 }

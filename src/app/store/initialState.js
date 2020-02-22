@@ -98,3 +98,91 @@ export const note = {
   places: [],
   lastEdited: new Date().getTime()
 }
+
+
+// data structure
+
+// export const quote = {
+//   byId: {
+//     "q1": {
+//       id: "q1",
+//       text: "",
+//       favorite: false,
+//       authorId: "a1",
+//       seriesId: "s1",
+//       bookId: "b1",
+//       characterId: "ch1",
+//       eventId: "e1",
+//       topicIds: [],
+//       pageNumber: 123,
+//       notes: "",
+//     }
+//   },
+//   allIds: []
+// }
+
+// export const topic = {
+//   byId: {
+//     "t1": {
+//       id: "t1",
+//       color: "",
+//       name: ""
+//     }
+//   },
+//   allIds: ["t1"]
+// }
+
+// export const author = {
+//   byId: {
+//     "a1": {
+//       name: "",
+//       seriesIds: [],
+//       bookIds: [],
+//     }
+//   },
+//   allIds: ["a1"]
+// }
+
+// export const series = {
+//   byId: {
+//     "s1": {
+//       name: "",
+//       authorId: "a1",
+//       bookIds: [],
+//     }
+//   },
+//   allIds: ["s1"]
+// }
+
+// export const book = {
+//   byId: {
+//     "b1": {
+//       name: "",
+//       authorId: "a1",
+//       characterIds: [],
+//     }
+//   },
+//   allIds: ["b1"]
+// }
+
+// export const character = {
+//   byId: {
+//     "ch1": {
+//       name: "",
+//       bookId: "b1",
+//     }
+//   },
+//   allIds: ["ch1"]
+// }
+
+// export const event = {
+//   byId: {
+//     "e1": {
+//       name: "",
+//       time: new Date(),
+//       place: "",
+//       authorId: "a1",
+//     }
+//   },
+//   allIds: ["e1"]
+// }

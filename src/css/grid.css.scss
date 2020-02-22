@@ -1,0 +1,81 @@
+@import "vars";
+
+.gridWrapper {
+  display: flex;
+  padding-left: 20px;
+
+  .topicsText {
+    padding-top: 23px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    border-bottom: 3px solid $gray-8;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .topicsWrapper {
+    border-right: 1px solid $gray-6;
+    padding-right: 10px;
+    height: 100vh;
+
+    .topic {
+      padding: 10px 2px;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .topic:hover {
+      background-color: $gray-8;
+    }
+    .topic.active {
+      background-color: $gray-7;
+    }
+  }
+
+  .rightSideWrapper {
+    flex-grow: 1;
+  }
+
+  .categoriesWrapper {
+    display: flex;
+    // border-bottom: 1px solid $gray-6;
+    background-color: $gray-8;
+    flex-grow: 1;
+
+    .category {
+      padding: 10px 20px;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .category:hover {
+      background-color: $gray-7;
+    }
+    .category.active {
+      background-color: $gray-9;
+    }
+  }
+
+  .grid {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+
+    .card {
+      height: 136px;
+      width: 220px;
+      margin: 10px;
+      padding: 10px;
+
+      // border: 3px solid $green-6;
+      border: 1px solid $green-2;
+      border-radius: 1px;
+
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+}

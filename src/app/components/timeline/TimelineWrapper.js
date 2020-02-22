@@ -30,25 +30,6 @@ class TimelineWrapper extends Component {
     this.tableRef = null
   }
 
-  componentDidMount () {
-    this.tableRef.onscroll = this.scrollHandler
-    const { zoomIndex } = this.props.ui
-    if (!zoomIndex) {
-      this.props.actions.resetZoom()
-    } else {
-      this.updateZoom(this.props.ui)
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    this.updateZoom(nextProps.ui)
-  }
-
-  componentWillUnmount () {
-    this.tableRef.onScroll = null
-    this.tableRef = null
-  }
-
   // ////////////
   //  zooming  //
   // ////////////
@@ -278,19 +259,18 @@ class TimelineWrapper extends Component {
 
   render () {
     const { darkMode } = this.props.ui
-    let containerKlasses = 'container-with-sub-nav'
+    let containerKlasses = ''
     if (darkMode) containerKlasses += ' darkmode'
     let tableKlass = darkMode ? 'darkmode' : ''
     return (
       <div id='timelineview__container' className={containerKlasses}>
-        {this.renderSubNav()}
         <div id='timelineview__root'>
-          <StickyTable wrapperRef={ref => this.tableRef = ref} className={tableKlass}>
+          <div>
             <TimelineTable
               filter={this.state.filter}
               filterIsEmpty={this.filterIsEmpty()}
             />
-          </StickyTable>
+          </div>
         </div>
       </div>
     )

@@ -16,6 +16,16 @@ import * as LineActions from 'actions/lines'
 import * as CardActions from 'actions/cards'
 import { reorderList, insertScene } from 'helpers/lists'
 import SceneTitleCell from 'components/timeline/SceneTitleCell'
+import Floater from 'react-floater'
+
+const topics = ['Parenthood', 'Marriage', 'Love', 'Friendship', 'Motherhood']
+const categories = ['Favorites', 'Author', 'Series', 'Book', 'Character', 'Event']
+const cards = [
+  'Someone awesome once said...',
+  'Isn\'t it great that tomorrow doesn\'t have any mistakes in it yet',
+  '', '', '', '', '', '',
+  'Kindred spirits blah blah blah'
+]
 
 class TimelineTable extends Component {
 
@@ -227,10 +237,46 @@ class TimelineTable extends Component {
     </Cell>
   }
 
-  render () {
-    const rows = this.renderRows()
+  renderTopics () {
+    return topics.map(t => <div key={t} className='topic'>{t}</div>)
+  }
 
-    return [<TopRow key='top-row'/>, rows]
+  renderCategories () {
+    return categories.map(c => <div key={c} className='category'>{c}</div>)
+  }
+
+  renderCards () {
+    return cards.map((c, idx) => {
+      return <Floater key={idx}
+          footer="footer@"
+          offset={5}
+          eventDelay={1}
+          content={
+            <div>
+              I can be triggered by click or hover (on devices with a mouse)
+            </div>
+          }
+          event="hover"
+          placement="right"
+        >
+          <div className='card'>{c}</div>
+        </Floater>
+    })
+  }
+
+  render () {
+    return <div className='gridWrapper'>
+      <div className='topicsWrapper'>
+        <div className='topicsText'>Topics</div>
+        {this.renderTopics()}
+      </div>
+      <div className='rightSideWrapper'>
+        <div className='categoriesWrapper'>{this.renderCategories()}</div>
+        <div className='grid'>
+          {this.renderCards()}
+        </div>
+      </div>
+    </div>
   }
 }
 
