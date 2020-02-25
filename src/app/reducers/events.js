@@ -1,7 +1,7 @@
 import { FILE_LOADED, NEW_FILE, RESET } from '../constants/ActionTypes'
-import { initialCharacter, newFileState } from 'store/initialState'
+import { initialEvent, newFileState } from 'store/initialState'
 
-export default function characters (state = newFileState, action) {
+export default function events (state = newFileState, action) {
   switch (action.type) {
 
     case NEW_FILE:
@@ -9,7 +9,7 @@ export default function characters (state = newFileState, action) {
 
     case RESET:
     case FILE_LOADED:
-      return action.data.entities.characters
+      return action.data.entities.events
 
     default:
       return state || newFileState

@@ -89,7 +89,7 @@ app.on('window-all-closed', () => {
 app.on('open-file', (event, path) => {
   // do the file opening here
   if (app.isReady()) {
-    openWindow(path)
+    openMainWindow(path)
   } else {
     fileToOpen = path
   }
@@ -308,7 +308,7 @@ function saveFile (fileName, data, callback) {
 function displayFileName (path) {
   var stringBase = 'Quotr'
   if (TRIALMODE) stringBase += ' — ' + i18n('TRIAL Version') + ' (' + i18n('{days} days remaining', {days: DAYS_LEFT}) + ')'
-  var matches = path.match(/.*\/(.*\.pltr)/)
+  var matches = path.match(/.*\/(.*\.qtr)/)
   if (matches) stringBase += ` — ${matches[1]}`
   return stringBase
 }
@@ -323,11 +323,11 @@ function isDirty (newState, oldState) {
 function openRecentFiles () {
   // open-file for windows
   if (process.platform === 'win32' && process.argv.length == 2) {
-    if (process.argv[1].includes('.pltr')) {
-      openWindow(process.argv[1])
+    if (process.argv[1].includes('.qtr')) {
+      openMainWindow(process.argv[1])
     }
   } else if (fileToOpen) {
-    openWindow(fileToOpen)
+    openMainWindow(fileToOpen)
     fileToOpen = null
   } else {
     storage.has(recentKey, function (err, hasKey) {
@@ -335,7 +335,7 @@ function openRecentFiles () {
       if (hasKey) {
         storage.get(recentKey, function (err, fileName) {
           if (err) { log.warn(err); rollbar.warn(err) }
-          openWindow(fileName)
+          openMainWindow(fileName)
         })
       } else {
         askToOpenOrCreate()
@@ -364,8 +364,8 @@ function askToSave (win, state, fileName, callback) {
 function askToCreateFile () {
   dialog.showSaveDialog({title: i18n('Where would you like to start your new file?')}, function (fileName) {
     if (fileName) {
-      var fullName = fileName + '.pltr'
-      openWindow(fullName, true)
+      var fullName = fileName + '.qtr'
+      openMainWindow(fullName, true)
       saveFile(fullName, {}, function (err) {
         if (err) {
           log.warn(err)
@@ -402,17 +402,16 @@ function askToOpenFile () {
   var filters = [{name: 'Plottr file', extensions: ['pltr']}]
   dialog.showOpenDialog(win, {filters: filters, properties: properties }, function (chosenFileName) {
     if (chosenFileName && chosenFileName.length > 0) {
-      openWindow(chosenFileName[0])
+      openMainWindow(chosenFileName[0])
     }
   })
 }
 
-function openWindow (fileName, newFile = false) {
+function openMainWindow (fileName, newFile = false) {
   // Load the previous state with fallback to defaults
   let stateKeeper = windowStateKeeper({
     defaultWidth: 1200,
     defaultHeight: 800,
-    file: fileName,
   });
 
   // Create the browser window.
@@ -423,8 +422,8 @@ function openWindow (fileName, newFile = false) {
     height: stateKeeper.height,
     fullscreen: stateKeeper.isFullScreen || null,
     show: false,
-    backgroundColor: '#f7f7f7',
-    webPreferences: {scrollBounce: true, nodeIntegration: true, spellcheck: true}
+    backgroundColor: '#f9f8f6',
+    webPreferences: {nodeIntegration: true, spellcheck: true}
   })
 
   // Let us register listeners on the window, so we can update the state
@@ -548,13 +547,13 @@ function removeRecentFile (fileNameToRemove) {
 }
 
 function createAndOpenEmptyFile () {
-  let fileName = path.join(app.getPath('documents'), 'plottr_trial.pltr')
+  let fileName = path.join(app.getPath('documents'), 'quotr_trial.qtr')
   try {
     // see if this file exists already
     let stat = fs.statSync(fileName)
     if (stat) {
       let date = new Date()
-      fileName = path.join(app.getPath('documents'), `plottr_trial_${date.getTime()}.pltr`)
+      fileName = path.join(app.getPath('documents'), `quotr_trial_${date.getTime()}.qtr`)
     }
   } catch (error) {
     log.warn(error)
@@ -564,7 +563,7 @@ function createAndOpenEmptyFile () {
         log.warn(err)
         rollbar.warn(err)
       } else {
-        openWindow(fileName)
+        openMainWindow(fileName)
       }
     })
   }
@@ -758,7 +757,7 @@ function loadMenu () {
 
 function buildMenu () {
   return [
-    buildPlottrMenu(),
+    buildQuotrMenu(),
     buildFileMenu(),
     buildEditMenu(),
     buildViewMenu(),
@@ -767,7 +766,7 @@ function buildMenu () {
   ]
 }
 
-function buildPlottrMenu () {
+function buildQuotrMenu () {
   var submenu = [{
     label: i18n('About Quotr'),
     click: openAboutWindow,
@@ -917,7 +916,7 @@ function buildFileMenu () {
       if (winObj) {
         dialog.showSaveDialog(win, {title: i18n('Where would you like to save this copy?')}, function (fileName) {
           if (fileName) {
-            var fullName = fileName + '.pltr'
+            var fullName = fileName + '.qtr'
             saveFile(fullName, winObj.state, function (err) {
               if (err) {
                 log.warn(err)
@@ -926,7 +925,7 @@ function buildFileMenu () {
                 gracefullyNotSave()
               } else {
                 win.close()
-                openWindow(fullName)
+                openMainWindow(fullName)
               }
             })
           }

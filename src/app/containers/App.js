@@ -2,26 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Navigation from 'containers/Navigation'
-import Body from 'containers/Body'
-import * as UIActions from 'actions/ui'
-import GuidedTour from '../components/GuidedTour'
+import Grid from '../components/grid/GridView'
 
 class App extends Component {
   render () {
-    return (
-      <div>
-        <Navigation />
-        <Body />
-        <GuidedTour />
-      </div>
-    )
+    return <Grid />
   }
 }
 
 App.propTypes = {
   file: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
@@ -31,9 +21,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(UIActions, dispatch)
-  }
+  return {}
 }
 
 export default connect(

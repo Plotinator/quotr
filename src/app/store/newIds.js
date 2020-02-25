@@ -1,4 +1,4 @@
-export function sceneId (scenes) {
+export function authorId (scenes) {
   return scenes.reduce((maxId, scene) => Math.max(scene.id, maxId), -1) + 1
 }
 

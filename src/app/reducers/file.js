@@ -1,10 +1,10 @@
 import { remote } from 'electron'
 import { FILE_LOADED, FILE_SAVED, NEW_FILE, RESET } from '../constants/ActionTypes'
-import { file as defaultFile } from 'store/initialState'
+import { initialFile } from 'store/initialState'
 const app = remote.app
 const VERSION = app.getVersion()
 
-export default function file (state = defaultFile, action) {
+export default function file (state = initialFile, action) {
   switch (action.type) {
     case FILE_LOADED:
       return { fileName: action.fileName, loaded: true, dirty: action.dirty, version: VERSION }

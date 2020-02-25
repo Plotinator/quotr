@@ -6,13 +6,12 @@ import { Provider } from 'react-redux'
 import App from 'containers/App'
 import configureStore from 'store/configureStore'
 import { ipcRenderer, remote } from 'electron'
-const { Menu, MenuItem } = remote
+// const { Menu, MenuItem } = remote
 const win = remote.getCurrentWindow()
 const app = remote.app
 import { newFile, fileSaved, loadFile, setDarkMode } from 'actions/ui'
 import mixpanel from 'mixpanel-browser'
 import { MPQ, setTrialInfo } from 'middlewares/helpers'
-import FileFixer from 'helpers/fixer'
 import log from 'electron-log'
 import i18n from 'format-message'
 import Modal from 'react-modal'
@@ -22,7 +21,6 @@ i18n.setup({
   locale: app.getLocale() || 'en'
 })
 
-console.log('NODE ENV', process.env.NODE_ENV)
 let environment = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 require('dotenv').config({path: path.resolve(__dirname, '..', '.env')})
 let rollbarToken = process.env.ROLLBAR_ACCESS_TOKEN || ''
@@ -50,12 +48,12 @@ mixpanel.init('507cb4c0ee35b3bde61db304462e9351')
 Modal.setAppElement('#react-root')
 const root = document.getElementById('react-root')
 const store = configureStore()
+ipcRenderer.send('fetch-state', win.id)
 
 ipcRenderer.on('state-saved', (_arg) => {
   store.dispatch(fileSaved())
 })
 
-ipcRenderer.send('fetch-state', win.id)
 ipcRenderer.on('state-fetched', (event, state, fileName, dirty, darkMode, openFiles) => {
   if (state && Object.keys(state).length > 0) {
     store.dispatch(loadFile(fileName, dirty, state))
@@ -90,57 +88,51 @@ ipcRenderer.on('set-dark-mode', (event, on) => {
   window.document.body.className = on ? 'darkmode' : ''
 })
 
-ipcRenderer.on('bought-in-app', (event, numOfDays) => {
-  MPQ.push('Buy', {online: navigator.onLine, num_of_days: numOfDays})
-})
-
 window.onerror = function (message, file, line, column, err) {
   if (process.env.NODE_ENV !== 'development') {
     log.warn(err)
     rollbar.info(err)
-    let newState = FileFixer(store.getState())
-    ipcRenderer.send('reload-window', win.id, newState)
   }
 }
 
 window.SCROLLWITHKEYS = true
 window.onkeydown = function (e) {
   if (window.SCROLLWITHKEYS) {
-    const table = document.querySelector(".sticky-table")
-    if (table) {
-      if (e.key === 'ArrowUp') {
-        var amount = 300
-        if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
-        table.scrollTop -= amount
-      } else if (e.key === 'ArrowRight') {
-        var amount = 400
-        if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
-        table.scrollLeft += amount
-      } else if (e.key === 'ArrowDown') {
-        var amount = 300
-        if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
-        table.scrollTop += amount
-      } else if (e.key === 'ArrowLeft') {
-        var amount = 400
-        if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
-        table.scrollLeft -= amount
-      }
-    }
+    // const table = document.querySelector(".sticky-table")
+    // if (table) {
+    //   if (e.key === 'ArrowUp') {
+    //     var amount = 300
+    //     if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
+    //     table.scrollTop -= amount
+    //   } else if (e.key === 'ArrowRight') {
+    //     var amount = 400
+    //     if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
+    //     table.scrollLeft += amount
+    //   } else if (e.key === 'ArrowDown') {
+    //     var amount = 300
+    //     if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
+    //     table.scrollTop += amount
+    //   } else if (e.key === 'ArrowLeft') {
+    //     var amount = 400
+    //     if (e.metaKey || e.ctrlKey || e.altKey) amount = 800
+    //     table.scrollLeft -= amount
+    //   }
+    // }
   }
 }
 
-const menu = new Menu()
-menu.append(new MenuItem({label: i18n('Cut'), accelerator: 'CmdOrCtrl+X', role: 'cut'}))
-menu.append(new MenuItem({label: i18n('Copy'), accelerator: 'CmdOrCtrl+C', role: 'copy'}))
-menu.append(new MenuItem({type: 'separator'}))
-menu.append(new MenuItem({label: i18n('Paste'), accelerator: 'CmdOrCtrl+V', role: 'paste'}))
-menu.append(new MenuItem({type: 'separator'}))
-menu.append(new MenuItem({label: i18n('Select All'), accelerator: 'CmdOrCtrl+A', role: 'selectall'}))
+// const menu = new Menu()
+// menu.append(new MenuItem({label: i18n('Cut'), accelerator: 'CmdOrCtrl+X', role: 'cut'}))
+// menu.append(new MenuItem({label: i18n('Copy'), accelerator: 'CmdOrCtrl+C', role: 'copy'}))
+// menu.append(new MenuItem({type: 'separator'}))
+// menu.append(new MenuItem({label: i18n('Paste'), accelerator: 'CmdOrCtrl+V', role: 'paste'}))
+// menu.append(new MenuItem({type: 'separator'}))
+// menu.append(new MenuItem({label: i18n('Select All'), accelerator: 'CmdOrCtrl+A', role: 'selectall'}))
 
-window.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
-  menu.popup(remote.getCurrentWindow())
-}, false)
+// window.addEventListener('contextmenu', (e) => {
+//   e.preventDefault()
+//   menu.popup(remote.getCurrentWindow())
+// }, false)
 
 window.logger = function(which) {
   process.env.LOGGER = which.toString()

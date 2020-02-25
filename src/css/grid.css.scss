@@ -33,14 +33,17 @@
   }
 
   .rightSideWrapper {
-    flex-grow: 1;
+    // flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
   }
 
   .categoriesWrapper {
     display: flex;
     // border-bottom: 1px solid $gray-6;
     background-color: $gray-8;
-    flex-grow: 1;
+    // flex-grow: 1;
 
     .category {
       padding: 10px 20px;
@@ -59,6 +62,7 @@
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
+    flex-grow: 1;
     overflow-y: auto;
 
     .card {
@@ -69,13 +73,50 @@
 
       // border: 3px solid $green-6;
       border: 1px solid $green-2;
-      border-radius: 1px;
+      // border-radius: 1px;
 
       overflow: hidden;
 
       display: flex;
       justify-content: center;
       cursor: pointer;
+    }
+    .card.addButton {
+      @extend .card;
+      border: none;
+      align-items: center;
+
+      .circle {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+
+        background-color: $blue-6;
+        color: white;
+        font-size: 24px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: all 0.6 $cubic;
+
+        .glyphicon {
+          margin-left: 3px;
+          margin-bottom: 3px;
+        }
+      }
+    }
+    .card:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card.addButton:hover {
+      border: 3px dashed $gray-8;
+
+      .circle {
+        background-color: $blue-5;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }

@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "authors": {
+      "allIds": [],
+      "byId": {}
+    },
+    "books": {
+      "allIds": [],
+      "byId": {}
+    },
+    "characters": {
+      "allIds": [],
+      "byId": {}
+    },
+    "events": {
+      "allIds": [],
+      "byId": {}
+    },
+    "quotes": {
+      "allIds": [],
+      "byId": {}
+    },
+    "series": {
+      "allIds": [],
+      "byId": {}
+    },
+    "speeches": {
+      "allIds": [],
+      "byId": {}
+    },
+    "topics": {
+      "allIds": [],
+      "byId": {}
+    }
+  },
+  "file": {
+    "dirty": false,
+    "fileName": "/Users/sparrowhawk/github/quotr/example.qtr",
+    "loaded": true,
+    "version": "0.0.1"
+  },
+  "ui": {
+    "darkMode": false,
+    "openCard": null,
+    "selectedCategory": null,
+    "selectedTopic": null
+  }
+}

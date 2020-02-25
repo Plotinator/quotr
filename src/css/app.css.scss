@@ -1,20 +1,5 @@
 @import "bootstrap_configuration";
-@import "card_block";
-@import "card_dialog";
-@import "character_list_block";
-@import "line_block";
-@import "outline_block";
-@import "place_list_block";
-@import "scene_block";
-@import "tag_list_block";
 @import "color_picker_block";
-@import "subnav_block";
-@import "timeline_block";
-@import "history_block";
-@import "notes_block";
-@import "select_list_block";
-@import "filter_list_block";
-@import "custom_attr_block";
 @import "verify_window";
 @import "expired_window";
 @import "grid";
@@ -45,10 +30,6 @@ h1, h2, h3, h4, h5, h6 {
   @include header-font;
 }
 
-h3.popover-title {
-  font-size: 12pt !important;
-}
-
 .secondary-text {
   @include secondary-text;
 }
@@ -72,71 +53,15 @@ h3.popover-title {
 }
 
 .glyphicon {
-  vertical-align: baseline;
+  // vertical-align: baseline;
 }
 
 .glyphicon-ok {
   vertical-align: baseline;
 }
 
-.navbar-brand {
-  @include header-font;
-  font-size: 24px;
-}
-.nav.navbar-nav {
-  @include application-text;
-}
 .btn {
   @include application-text;
 }
 
-.blue-background {
-  background-color: $blue;
-}
 
-.CodeMirror-wrap {
-  border: 1px solid $gray-5;
-  border-top: none;
-  .CodeMirror-line {
-    background-color: white;
-    border: none;
-    color: $gray-0;
-  }
-  .CodeMirror-selectedtext {
-    background-color: $blue-8;
-  }
-
-  .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
-    background: none;
-    border-bottom: 1px dotted $red-5;
-  }
-
-  .CodeMirror-selectedtext.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
-    background-color: $blue-8;
-  }
-}
-
-.tour-helper {
-  padding-right: 60px!important;
-  max-width: 700px!important;
-  font-size: 18pt;
-
-  [data-tour-elem="controls"] {
-    margin-top: 40px!important;
-  }
-
-  button:not([data-tour-elem="dot"]) {
-    height: 15px!important;
-    width: 15px!important;
-  }
-
-  button[data-tour-elem="left-arrow"], button[data-tour-elem="right-arrow"] {
-    height: 20px!important;
-    width: 20px!important;
-  }
-
-  .reactour__dot {
-    height: 12px!important;
-    width: 12px!important;
-  }
-}
