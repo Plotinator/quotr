@@ -3,9 +3,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Floater from 'react-floater'
 import { Glyphicon } from 'react-bootstrap'
+import * as UIActions from 'actions/ui'
+import TopicList from 'components/grid/TopicList'
+import Card from 'components/grid/Card'
+import { IoIosAdd } from "react-icons/io"
 
 
-const topics = ['Parenthood', 'Marriage', 'Love', 'Friendship', 'Motherhood']
 const categories = ['Favorites', 'Author', 'Series', 'Book', 'Character', 'Speech', 'Event']
 const cards = [
   'Someone awesome once said...',
@@ -17,8 +20,8 @@ const cards = [
 
 class GridView extends Component {
 
-  renderTopics () {
-    return topics.map(t => <div key={t} className='topic'>{t}</div>)
+  openCard = (index) => {
+    this.props.actions.openCard(index)
   }
 
   renderCategories () {
@@ -26,34 +29,19 @@ class GridView extends Component {
   }
 
   renderCards () {
-    return cards.map((c, idx) => {
-      return <Floater key={idx}
-          footer="footer@"
-          offset={1}
-          eventDelay={1}
-          content={
-            <div>
-              I can be triggered by click or hover (on devices with a mouse)
-            </div>
-          }
-          event="hover"
-          placement="right"
-          style={{cursor: 'normal'}}
-        >
-          <div className='card'>{c}</div>
-        </Floater>
-    })
+    // TODO: just pass in card id
+    return cards.map((c, idx) => <Card key={idx} card={c} idx={idx} /> )
   }
 
   renderAddButton () {
-    return <div className='card addButton'><div className='circle'><Glyphicon glyph='plus'/></div></div>
+    return <div className='card addButton'><div className='circle'><IoIosAdd /></div></div>
   }
 
   render () {
     return <div className='gridWrapper'>
       <div className='topicsWrapper'>
         <div className='topicsText'>Topics</div>
-        {this.renderTopics()}
+        <TopicList />
       </div>
       <div className='rightSideWrapper'>
         <div className='categoriesWrapper'>{this.renderCategories()}</div>
@@ -68,12 +56,17 @@ class GridView extends Component {
 
 function mapStateToProps (state) {
   return {
-    file: state.file
+    file: state.file,
+    ui: state.ui,
+    quotes: state.entities.quotes,
+    books: state.entities.books,
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  return {}
+  return {
+    actions: bindActionCreators(UIActions, dispatch)
+  }
 }
 
 export default connect(

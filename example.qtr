@@ -29,12 +29,44 @@
       "byId": {}
     },
     "topics": {
-      "allIds": [],
-      "byId": {}
+      "allIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "byId": {
+        "t1": {
+          "color": "",
+          "id": "t1",
+          "name": "Parenthood"
+        },
+        "t2": {
+          "color": "",
+          "id": "t2",
+          "name": "Marriage"
+        },
+        "t3": {
+          "color": "",
+          "id": "t3",
+          "name": "Love"
+        },
+        "t4": {
+          "color": "",
+          "id": "t4",
+          "name": "Friendship"
+        },
+        "t5": {
+          "color": "",
+          "id": "t5",
+          "name": "Motherhood"
+        }
+      }
     }
   },
   "file": {
-    "dirty": false,
+    "dirty": true,
     "fileName": "/Users/sparrowhawk/github/quotr/example.qtr",
     "loaded": true,
     "version": "0.0.1"
@@ -43,6 +75,6 @@
     "darkMode": false,
     "openCard": null,
     "selectedCategory": null,
-    "selectedTopic": null
+    "selectedTopics": []
   }
 }

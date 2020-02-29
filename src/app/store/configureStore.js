@@ -5,6 +5,6 @@ import tracker from '../middlewares/tracker'
 import logger from '../middlewares/logger'
 
 export default function configureStore (initialState) {
-  const store = createStore(rootReducer, initialState, applyMiddleware(saver, tracker, logger))
+  const store = createStore(rootReducer, initialState, applyMiddleware(saver, logger))
   return store
 }

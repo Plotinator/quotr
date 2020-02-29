@@ -1,7 +1,7 @@
 {
   "name": "quotr",
-  "description": "An elegant writing tool that helps organize plotlines",
-  "repository": "https://github.com/cameronsutter/plottr_electron.git",
+  "description": "A tool to organize your quotes",
+  "repository": "https://github.com/plotinator/quotr.git",
   "private": true,
   "readme": "Copyright 2020 C. Louis S. (Cameron Sutter)",
   "version": "0.0.1",
@@ -17,7 +17,7 @@
     "serve": "NODE_ENV=dev node_modules/.bin/webpack",
     "watch": "echo 'do you have fsevents?' && NODE_ENV=dev node_modules/.bin/webpack",
     "createDevLicense": "node bin/main_modules/dev_license.js",
-    "changelog": "changelog cameronsutter/plottr_electron all -m > changelog.md",
+    "changelog": "changelog plotinator/quotr all -m > changelog.md",
     "pack": "NODE_ENV=production node_modules/.bin/webpack 1> /dev/null",
     "pack:windows": "node_modules\\.bin\\webpack",
     "dist": "node build/initEnv.js && npm run pack && electron-builder",
@@ -45,6 +45,7 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.8.6",
     "react-floater": "^0.7.2",
+    "react-icons": "^3.9.0",
     "react-modal": "^3.8.1",
     "react-overlays": "^1.2.0",
     "react-proptypes": "^1.0.0",
@@ -56,7 +57,8 @@
     "redux": "^3.5.2",
     "request": "^2.88.0",
     "rollbar": "^2.7.1",
-    "simplemde": "^1.11.2"
+    "simplemde": "^1.11.2",
+    "spectre.css": "^0.5.8"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -86,7 +88,7 @@
   },
   "build": {
     "electronVersion": "5.0.4",
-    "appId": "com.plottr.app",
+    "appId": "com.quotr.app",
     "artifactName": "${productName}-${os}-installer-${version}.${ext}",
     "publish": [
       "github"
@@ -100,17 +102,15 @@
       "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,__pycache__,thumbs.db,.gitignore,.gitattributes,.editorconfig,.flowconfig,.yarn-metadata.json,.idea,appveyor.yml,.travis.yml,circle.yml,npm-debug.log,.nyc_output,yarn.lock,.yarn-integrity}",
       "!src${/*}",
       "!webpack.config.js",
-      "!example*.pltr",
-      "!example*.docx",
-      "!screenshots"
+      "!example*.qtr"
     ],
     "copyright": "Copyright © 2020 C. Louis S. (Cameron Sutter)",
-    "productName": "Plottr",
+    "productName": "Quotr",
     "fileAssociations": [
       {
-        "ext": "pltr",
-        "name": "Plottr",
-        "description": "An elegant writing tool to organize story plotlines",
+        "ext": "qtr",
+        "name": "Quotr",
+        "description": "A tool to organize your quotes",
         "role": "Editor"
       }
     ],
@@ -127,7 +127,7 @@
       "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "dmg": {
-      "backgroundColor": "#f7f7f7",
+      "backgroundColor": "#f9f8f6",
       "title": "${productName} Installer",
       "sign": false
     },

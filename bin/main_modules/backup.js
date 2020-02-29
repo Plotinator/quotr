@@ -7,6 +7,8 @@ const rollbar = setupRollbar('backup')
 const { BACKUP_BASE_PATH } = require('./config_paths')
 const SETTINGS = require('./settings')
 
+// TODO: make a backup per day, but not in its own folder
+
 function backupFile(fileName, data, callback) {
   if (process.env.NODE_ENV === 'dev') return
   if (!SETTINGS.get('backup')) return
@@ -44,14 +46,12 @@ function ensureBackupTodayPath () {
 }
 
 function ensureBackupFullPath() {
-  log.info('ensuring backup path')
   if (!fs.existsSync(BACKUP_BASE_PATH)) {
     fs.mkdirSync(BACKUP_BASE_PATH)
   }
 
   ensureBackupTodayPath()
 }
-log.info('going to ensure backup path')
 ensureBackupFullPath()
 
 module.exports = backupFile

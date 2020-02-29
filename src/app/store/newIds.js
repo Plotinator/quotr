@@ -1,37 +1,24 @@
-export function authorId (scenes) {
-  return scenes.reduce((maxId, scene) => Math.max(scene.id, maxId), -1) + 1
+// TODO: the rest of these prefixes
+const AUTHOR = 'a'
+const TOPIC = 't'
+const QUOTE = 'q'
+
+export function newId (ids, prefix) {
+  let searching = true
+  let possibleId = ''
+  while (searching) {
+    possibleId = makeId(prefix)
+    searching = ids.includes(possibleId)
+  }
+  return possibleId
 }
 
-export function scenePosition (scenes) {
-  return scenes.reduce((maxPosition, scene) => Math.max(scene.position, maxPosition), -1) + 1
+function makeId (prefix) {
+  return Math.random().toString(16).replace('0.', `${prefix}.`).substr(0, 8)
 }
 
-export function tagId (tags) {
-  return tags.reduce((maxId, tag) => Math.max(tag.id, maxId), -1) + 1
-}
-
-export function placeId (places) {
-  return places.reduce((maxId, place) => Math.max(place.id, maxId), -1) + 1
-}
-
-export function characterId (characters) {
-  return characters.reduce((maxId, character) => Math.max(character.id, maxId), -1) + 1
-}
-
-export function cardId (cards) {
-  return cards.reduce((maxId, card) => Math.max(card.id, maxId), -1) + 1
-}
-
-export function lineId (lines) {
-  return lines.reduce((maxId, line) => Math.max(line.id, maxId), -1) + 1
-}
-
-export function linePosition (lines) {
-  return lines.reduce((maxPosition, line) => Math.max(line.position, maxPosition), -1) + 1
-}
-
-export function noteId (notes) {
-  return notes.reduce((maxId, note) => Math.max(note.id, maxId), -1) + 1
+export function position (items) {
+  return items.reduce((maxPosition, item) => Math.max(item.position, maxPosition), 0)
 }
 
 export function positionReset (items) {

@@ -42,7 +42,7 @@
   "ui": {
     "openCard": null,
     "darkMode": false,
-    "selectedTopic": null,
+    "selectedTopics": [],
     "selectedCategory": null
   }
 }

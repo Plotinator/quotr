@@ -75,6 +75,6 @@ export const initialFile = {
 export const initialUI = {
   openCard: null,
   darkMode: false,
-  selectedTopic: null,
-  selectedCategory: null,
+  selectedTopics: [],
+  selectedCategory: 0,
 }

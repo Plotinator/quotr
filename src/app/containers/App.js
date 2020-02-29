@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Grid from '../components/grid/GridView'
+import GridView from 'components/grid/GridView'
+import CardView from 'components/cards/CardView'
 
 class App extends Component {
   render () {
-    return <Grid />
+    return <>
+      <GridView />
+      <CardView />
+    </>
   }
 }
 
