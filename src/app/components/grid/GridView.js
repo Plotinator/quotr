@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Floater from 'react-floater'
-import { Glyphicon } from 'react-bootstrap'
 import * as UIActions from 'actions/ui'
 import TopicList from 'components/grid/TopicList'
 import Card from 'components/grid/Card'
